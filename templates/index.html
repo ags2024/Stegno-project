@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Steganography Tool</title>
+    <style>
+        body { font-family: Arial; margin: 40px; background: #f5f5f5; }
+        .card { background: white; padding: 20px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        button { padding: 10px; border: none; background: #333; color: white; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #555; }
+        textarea, input { width: 100%; margin: 5px 0; padding: 8px; }
+        .success { background: #e0ffe0; padding: 10px; border-radius: 5px; }
+        .error { background: #ffe0e0; padding: 10px; border-radius: 5px; color: red; }
+    </style>
+</head>
+<body>
+    <h1>🔐 Steganography Web App</h1>
+
+    <div class="card">
+        <h2>Encrypt (Hide Message)</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="action" value="hide">
+            <label>Select Image:</label>
+            <input type="file" name="image" required><br>
+            <label>Secret Message:</label>
+            <textarea name="secret" required></textarea><br>
+            <label>Passkey:</label>
+            <input type="password" name="password" required><br>
+            <button type="submit">🔒 Encrypt & Download</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Decrypt (Extract Message)</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="action" value="extract">
+            <label>Select Stego Image:</label>
+            <input type="file" name="image" required><br>
+            <label>Passkey:</label>
+            <input type="password" name="password" required><br>
+            <button type="submit">🔓 Decrypt Message</button>
+        </form>
+
+        {% if message %}
+            <div class="success">
+                <h3>✅ Extracted Message:</h3>
+                <p>{{ message }}</p>
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
