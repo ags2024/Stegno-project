@@ -83,7 +83,7 @@ def index():
             if msg:
                 extracted_message = msg
             else:
-                error = "❌ Wrong passkey or corrupted image"
+                error = " Wrong passkey or corrupted image"
 
     return render_template("index.html", message=extracted_message, error=error)
 
